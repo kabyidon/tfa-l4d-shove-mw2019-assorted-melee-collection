@@ -39,9 +39,9 @@ SWEP.Primary.Sound_Hit = Sound("weapon_mw2019_wood_bat.swing_world")
 SWEP.Primary.Sound_HitFlesh = Sound("weapon_mw2019_wood_bat.swing_flesh")
 SWEP.Primary.DamageType = bit.bor(DMG_CLUB)
 SWEP.Primary.RPM = 100
-SWEP.Primary.Damage = 35
+SWEP.Primary.Damage = 50
 SWEP.Primary.MaxCombo = 0
-SWEP.Secondary.Damage = 105
+SWEP.Secondary.Damage = 90
 SWEP.Secondary.MaxCombo = 0
 
 --SWEP.Primary.Automatic = false
@@ -52,8 +52,8 @@ SWEP.Primary.Attacks = {
 	{
 		["act"] = ACT_VM_HITLEFT, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
 		["len"] = 75, -- Trace distance
-		["src"] = Vector(45 -1, -30), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(45, 10, 30), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["src"] = Vector(0 -1, -30), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(0, 10, 30), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 12 / 30, --Delay
@@ -84,8 +84,8 @@ SWEP.Primary.Attacks = {
 	{
 		["act"] = ACT_VM_SWINGHARD, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
 		["len"] = 75, -- Trace distance
-		["src"] = Vector(45 -1, -30), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(45, 10, 30), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["src"] = Vector(0 -1, -30), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(0, 10, 30), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 12 / 30, --Delay

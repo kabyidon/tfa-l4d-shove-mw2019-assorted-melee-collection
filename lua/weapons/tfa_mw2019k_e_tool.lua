@@ -1,6 +1,6 @@
-SWEP.Base = "tfa_melee_base"
+SWEP.Base = "tfa_kabyi_melee_base"
 DEFINE_BASECLASS(SWEP.Base)
-SWEP.Category = "TFA MW2019 Melees"
+SWEP.Category = "TFA MW2019 Melees Kabyi"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 SWEP.UseHands = true
@@ -41,7 +41,7 @@ SWEP.Primary.DamageType = bit.bor(DMG_CLUB,DMG_SLASH)
 SWEP.Primary.RPM = 100
 SWEP.Primary.Damage = 50
 SWEP.Primary.MaxCombo = 0
-SWEP.Secondary.Damage = 90
+SWEP.Secondary.Damage = 50
 SWEP.Secondary.MaxCombo = 0
 
 --SWEP.Primary.Automatic = false
@@ -50,19 +50,19 @@ SWEP.Secondary.MaxCombo = 0
 --[Traces]--
 SWEP.Primary.Attacks = {
 	{
-		["act"] = ACT_VM_PRIMARYATTACK, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
+		["act"] = ACT_VM_SWINGHARD, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
 		["len"] = 65, -- Trace distance
 		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(-45, 1, -18), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dmg"] = SWEP.Primary.Damage, --Damage
+		["dir"] = Vector(18, 15, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dmg"] = SWEP.Secondary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
-		["delay"] = 2 / 30, --Delay
+		["delay"] = 3 / 30, --Delay
 		["spr"] = true, --Allow attack while sprinting?
 		["snd"] = SWEP.Primary.Sound, -- Sound ID
 		["hitflesh"] = SWEP.Primary.Sound_HitFlesh,
 		["hitworld"] = SWEP.Primary.Sound_Hit,
 		["viewpunch"] = Angle(0, 0, 0), --viewpunch angle
-		["end"] = 0.75, --time before next attack
+		["end"] = 0.9, --time before next attack
 		["hull"] = 1, --Hullsize
 	},
 	{
@@ -72,7 +72,7 @@ SWEP.Primary.Attacks = {
 		["dir"] = Vector(-18, 1, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
-		["delay"] = 8 / 30, --Delay
+		["delay"] = 5 / 30, --Delay
 		["spr"] = true, --Allow attack while sprinting?
 		["snd"] = SWEP.Primary.Sound, -- Sound ID
 		["hitflesh"] = SWEP.Primary.Sound_HitFlesh,
@@ -80,26 +80,28 @@ SWEP.Primary.Attacks = {
 		["viewpunch"] = Angle(0, 0, 0), --viewpunch angle
 		["end"] = 0.75, --time before next attack
 		["hull"] = 1, --Hullsize
-	},
+	}
 }
+
 SWEP.Secondary.Attacks = {
 	{
-		["act"] = ACT_VM_SWINGHARD, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
+		["act"] = ACT_VM_PRIMARYATTACK, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
 		["len"] = 65, -- Trace distance
-		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(18, 15, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dmg"] = SWEP.Secondary.Damage, --Damage
+		["src"] = Vector(35, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(-35, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
-		["delay"] = 7 / 30, --Delay
+		["delay"] = 3 / 30, --Delay
 		["spr"] = true, --Allow attack while sprinting?
 		["snd"] = SWEP.Primary.Sound, -- Sound ID
 		["hitflesh"] = SWEP.Primary.Sound_HitFlesh,
 		["hitworld"] = SWEP.Primary.Sound_Hit,
 		["viewpunch"] = Angle(0, 0, 0), --viewpunch angle
-		["end"] = 0.9, --time before next attack
+		["end"] = 0.75, --time before next attack
 		["hull"] = 1, --Hullsize
-	},
+	}
 }
+
 
 --[Stuff]--
 SWEP.ImpactDecal = "ManhackCut"

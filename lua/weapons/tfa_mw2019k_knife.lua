@@ -1,6 +1,6 @@
-SWEP.Base = "tfa_melee_base"
+SWEP.Base = "tfa_kabyi_melee_base"
 DEFINE_BASECLASS(SWEP.Base)
-SWEP.Category = "TFA MW2019 Melees"
+SWEP.Category = "TFA MW2019 Melees Kabyi"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 SWEP.UseHands = true
@@ -39,9 +39,9 @@ SWEP.Primary.Sound_Hit = Sound("weapon_mw2019_knife.swing_world")
 SWEP.Primary.Sound_HitFlesh = Sound("weapon_mw2019_knife.swing_flesh")
 SWEP.Primary.DamageType = bit.bor(DMG_CLUB, DMG_SLASH)
 SWEP.Primary.RPM = 100
-SWEP.Primary.Damage = 90
+SWEP.Primary.Damage = 50
 SWEP.Primary.MaxCombo = 0
-SWEP.Secondary.Damage = 135
+SWEP.Secondary.Damage = 50
 SWEP.Secondary.MaxCombo = 0
 
 --SWEP.Primary.Automatic = false

@@ -102,8 +102,8 @@ SWEP.Secondary.Attacks = {
 	{
 		["act"] = ACT_VM_HITLEFT, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
 		["len"] = 50, -- Trace distance
-		["src"] = Vector(45, 10, 35), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(45, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["src"] = Vector(50, 10, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(-50, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Secondary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 7 / 30, --Delay

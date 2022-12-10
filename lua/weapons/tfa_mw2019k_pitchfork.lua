@@ -1,6 +1,6 @@
-SWEP.Base = "tfa_melee_base"
+SWEP.Base = "tfa_kabyi_melee_base"
 DEFINE_BASECLASS(SWEP.Base)
-SWEP.Category = "TFA MW2019 Melees"
+SWEP.Category = "TFA MW2019 Melees Kabyi"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 SWEP.UseHands = true
@@ -39,9 +39,9 @@ SWEP.Primary.Sound_Hit = Sound("weapon_mw2019_sledgehammer.swing_world")
 SWEP.Primary.Sound_HitFlesh = Sound("weapon_mw2019_sledgehammer.swing_flesh")
 SWEP.Primary.DamageType = bit.bor(DMG_CLUB, DMG_SLASH)
 SWEP.Primary.RPM = 100
-SWEP.Primary.Damage = 135
+SWEP.Primary.Damage = 50
 SWEP.Primary.MaxCombo = 0
-SWEP.Secondary.Damage = 180
+SWEP.Secondary.Damage = 150
 SWEP.Secondary.MaxCombo = 0
 
 --SWEP.Primary.Automatic = false
@@ -52,7 +52,7 @@ SWEP.Primary.Attacks = {
 	{
 		["act"] = ACT_VM_HITLEFT, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
 		["len"] = 65, -- Trace distance
-		["src"] = Vector(0, 2.5, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["src"] = Vector(0, 2.5, 35), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dir"] = Vector(0, 15, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
@@ -85,7 +85,7 @@ SWEP.Primary.Attacks = {
 SWEP.Secondary.Attacks = {
 		{
 		["act"] = ACT_VM_PRIMARYATTACK, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
+		["len"] = 120, -- Trace distance
 		["src"] = Vector(0, 2.5, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dir"] = Vector(0, 35, 15), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage

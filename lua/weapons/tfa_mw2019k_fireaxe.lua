@@ -1,6 +1,6 @@
-SWEP.Base = "tfa_melee_base"
+SWEP.Base = "tfa_kabyi_melee_base"
 DEFINE_BASECLASS(SWEP.Base)
-SWEP.Category = "TFA MW2019 Melees"
+SWEP.Category = "TFA MW2019 Melees Kabyi"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 SWEP.UseHands = true
@@ -39,9 +39,9 @@ SWEP.Primary.Sound_Hit = Sound("weapon_mw2019_axe.swing_world")
 SWEP.Primary.Sound_HitFlesh = Sound("weapon_mw2019_axe.swing_flesh")
 SWEP.Primary.DamageType = bit.bor(DMG_CLUB, DMG_SLASH)
 SWEP.Primary.RPM = 100
-SWEP.Primary.Damage = 90
+SWEP.Primary.Damage = 100
 SWEP.Primary.MaxCombo = 0
-SWEP.Secondary.Damage = 135
+SWEP.Secondary.Damage = 100
 SWEP.Secondary.MaxCombo = 0
 
 --SWEP.Primary.Automatic = false
@@ -51,9 +51,9 @@ SWEP.Secondary.MaxCombo = 0
 SWEP.Primary.Attacks = {
 	{
 		["act"] = ACT_VM_PRIMARYATTACK, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
-		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(0, 1, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["len"] = 80, -- Trace distance
+		["src"] = Vector(0, 0, 45), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(0, 1, -45), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 9 / 30, --Delay
@@ -67,9 +67,9 @@ SWEP.Primary.Attacks = {
 	},
 	{
 		["act"] = ACT_VM_PRIMARYATTACK_1, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
-		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(0, 1, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["len"] = 80, -- Trace distance
+		["src"] = Vector(0, 0, 45), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(0, 1, -45), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 9 / 30, --Delay
@@ -83,9 +83,9 @@ SWEP.Primary.Attacks = {
 	},
 	{
 		["act"] = ACT_VM_PRIMARYATTACK_2, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
-		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(-45, 1, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["len"] = 80, -- Trace distance
+		["src"] = Vector(0, 0, 45), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(-10, 1, -45), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 9 / 30, --Delay
@@ -101,9 +101,9 @@ SWEP.Primary.Attacks = {
 SWEP.Secondary.Attacks = {
 	{
 		["act"] = ACT_VM_SWINGHARD, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
-		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
-		["dir"] = Vector(-45, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["len"] = 80, -- Trace distance
+		["src"] = Vector(60, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
+		["dir"] = Vector(-60, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Secondary.Damage, --Damage
 		["dmgtype"] = SWEP.Primary.DamageType,
 		["delay"] = 7 / 30, --Delay
@@ -117,7 +117,7 @@ SWEP.Secondary.Attacks = {
 	},
 	{
 		["act"] = ACT_VM_HITLEFT, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
+		["len"] = 80, -- Trace distance
 		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dir"] = Vector(-45, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Secondary.Damage, --Damage
@@ -143,7 +143,7 @@ SWEP.Secondary.BashDamage         = 25 -- Melee bash damage
 SWEP.Secondary.BashSound          = "TFA.Bash" -- Soundscript name for bash swing sound
 SWEP.Secondary.BashHitSound       = "TFA.BashWall" -- Soundscript name for non-flesh hit sound
 SWEP.Secondary.BashHitSound_Flesh = "TFA.BashFlesh" -- Soundscript name for flesh hit sound
-SWEP.Secondary.BashLength         = 54 -- Length of bash melee trace in units
+SWEP.Secondary.BashLength         = 70 -- Length of bash melee trace in units
 SWEP.Secondary.BashDelay          = 0.2 -- Delay (in seconds) from bash start to bash attack trace
 SWEP.Secondary.BashDamageType     = DMG_SLASH -- Damage type (DMG_ enum value)
 SWEP.Secondary.BashEnd            = 20 / 20 -- Bash end time (in seconds), defaults to animation end if undefined
