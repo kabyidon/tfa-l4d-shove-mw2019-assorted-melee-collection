@@ -51,7 +51,7 @@ SWEP.Secondary.MaxCombo = 0
 SWEP.Primary.Attacks = {
 	{
 		["act"] = ACT_VM_PRIMARYATTACK, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
+		["len"] = 50, -- Trace distance
 		["src"] = Vector(0, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dir"] = Vector(-15, 1, -35), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage
@@ -67,7 +67,7 @@ SWEP.Primary.Attacks = {
 	},
 	{
 		["act"] = ACT_VM_PRIMARYATTACK_1, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
+		["len"] = 50, -- Trace distance
 		["src"] = Vector(45, 0, -45), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dir"] = Vector(-45, 1, 45), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Secondary.Damage, --Damage
@@ -86,7 +86,7 @@ SWEP.Primary.Attacks = {
 SWEP.Secondary.Attacks = {
 	{
 		["act"] = ACT_VM_HITLEFT, -- Animation; ACT_VM_THINGY, ideally something unique per-sequence
-		["len"] = 65, -- Trace distance
+		["len"] = 50, -- Trace distance
 		["src"] = Vector(50, 0, 0), -- Trace source; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dir"] = Vector(-50, 1, 0), -- Trace direction/length; X ( +right, -left ), Y ( +forward, -back ), Z ( +up, -down )
 		["dmg"] = SWEP.Primary.Damage, --Damage

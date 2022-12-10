@@ -3,140 +3,8 @@ if SERVER then
 end
 
 DEFINE_BASECLASS("tfa_melee_base")
-local vector_origin = Vector()
 
-SWEP.DrawCrosshair = true
-SWEP.SlotPos = 72
-SWEP.Slot = 0
-SWEP.WeaponLength = 8
-SWEP.Secondary.IronSightsEnabled = false
-SWEP.Secondary.DisplaySpread = false
-SWEP.Primary.Directional = false
-SWEP.Primary.Attacks = {}
-
-SWEP.IsMelee = true
-SWEP.Precision = 9 --Traces to use per attack
 local l_CT = CurTime
-SWEP.Primary.MaxCombo = 3 --Max amount of times you'll attack by simply holding down the mouse; -1 to unlimit
-SWEP.Secondary.MaxCombo = 3 --Max amount of times you'll attack by simply holding down the mouse; -1 to unlimit
-SWEP.CanBlock = false
-
-SWEP.BlockAnimation = {
-	["in"] = {
-		["type"] = TFA.Enum.ANIMATION_ACT, --Sequence or act
-		["value"] = ACT_VM_DEPLOY, --Number for act, String/Number for sequence
-		["transition"] = true
-	},
-	--Inward transition
-	["loop"] = {
-		["type"] = TFA.Enum.ANIMATION_ACT, --Sequence or act
-		["value"] = ACT_VM_IDLE_DEPLOYED, --Number for act, String/Number for sequence
-		["is_idle"] = true
-	},
-	--looping animation
-	["hit"] = {
-		["type"] = TFA.Enum.ANIMATION_ACT, --Sequence or act
-		["value"] = ACT_VM_RELOAD_DEPLOYED, --Number for act, String/Number for sequence
-		["is_idle"] = true
-	},
-	--when you get hit and block it
-	["out"] = {
-		["type"] = TFA.Enum.ANIMATION_ACT, --Sequence or act
-		["value"] = ACT_VM_UNDEPLOY, --Number for act, String/Number for sequence
-		["transition"] = true
-	}
-}
-
---Outward transition
-SWEP.BlockDamageTypes = {DMG_SLASH, DMG_CLUB}
-SWEP.BlockCone = 135 --Think of the player's view direction as being the middle of a sector, with the sector's angle being this
-SWEP.BlockDamageMaximum = 0.1 --Multiply damage by this for a maximumly effective block
-SWEP.BlockDamageMinimum = 0.4 --Multiply damage by this for a minimumly effective block
-SWEP.BlockTimeWindow = 0.5 --Time to absorb maximum damage
-SWEP.BlockTimeFade = 1 --Time for blocking to do minimum damage.  Does not include block window
-SWEP.BlockDamageCap = 100
-SWEP.BlockSound = ""
-SWEP.BlockFadeOut = nil --Override the length of the ["out"] block animation easily
-SWEP.BlockFadeOutEnd = 0.2 --In absense of BlockFadeOut, shave this length off of the animation time
-SWEP.BlockHoldType = "magic"
-SWEP.BlockCanDeflect = true --Can "bounce" bullets off a perfect parry?
-SWEP.Secondary.Directional = true
-SWEP.Primary.Automatic = true
-SWEP.Secondary.Automatic = true
-SWEP.ImpactDecal = "ManhackCut"
-SWEP.Secondary.CanBash = false
-SWEP.DefaultComboTime = 0.2
-SWEP.AllowSprintAttack = true
---[[ START OF BASE CODE ]]
---
-SWEP.Primary.ClipSize = -1
-SWEP.Primary.Ammo = ""
-SWEP.Seed = 0
-SWEP.AttackSoundTime = -1
-SWEP.VoxSoundTime = -1
-
-SWEP.Primary.DisplayFalloff = false
-
-SWEP.CrosshairConeRecoilOverride = .05
-
-function SWEP:SetupDataTables()
-	BaseClass.SetupDataTables(self)
-
-	self:NetworkVarTFA("Bool", "VP")
-	self:NetworkVarTFA("Bool", "BashImpulse")
-
-	self:NetworkVarTFA("Float", "VPTime")
-	self:NetworkVarTFA("Float", "VPPitch")
-	self:NetworkVarTFA("Float", "VPYaw")
-	self:NetworkVarTFA("Float", "VPRoll")
-
-	self:NetworkVarTFA("Int", "ComboCount")
-	self:NetworkVarTFA("Int", "MelAttackID")
-
-	self:SetMelAttackID(1)
-	self:SetVP(false)
-	self:SetVPPitch(0)
-	self:SetVPYaw(0)
-	self:SetVPRoll(0)
-	self:SetVPTime(-1)
-	self:SetComboCount(0)
-end
-
-function SWEP:Deploy()
-	self:SetMelAttackID(1)
-	self:SetVP(false)
-	self:SetVPPitch(0)
-	self:SetVPYaw(0)
-	self:SetVPRoll(0)
-	self:SetVPTime(-1)
-	self.up_hat = false
-	self:SetComboCount(0)
-	self:AddNZAnimations()
-
-	return BaseClass.Deploy(self)
-end
-
-function SWEP:AddNZAnimations()
-	if self.Primary.Attacks then
-		for _, v in pairs(self.Primary.Attacks) do
-			if v.act then
-				self.DTapActivities[v.act] = true
-			end
-		end
-	end
-
-	if self.Secondary.Attacks then
-		for _, v in pairs(self.Secondary.Attacks) do
-			if v.act then
-				self.DTapActivities[v.act] = true
-			end
-		end
-	end
-end
-
-function SWEP:CanInterruptShooting()
-	return false
-end
 
 local att = {}
 local attack
@@ -550,7 +418,7 @@ function SWEP:Strike(attk, precision)
 	--Handle flesh
 	for _, v in ipairs(totalResults) do
 		if v.Hit and IsValid(v.Entity) and TraceHitFlesh(v) and (not v.Entity.TFA_HasMeleeHit) then
-			local hitNPCs[v] == true 
+			hitNPCs[v.Entity:EntIndex()] = true 
 			self:ApplyDamage(v, damage, attk)
 			self:SmackEffect(v, damage)
 			v.Entity.TFA_HasMeleeHit = true
@@ -632,24 +500,39 @@ function SWEP:Strike(attk, precision)
 	end
 
 	-- Handle VJ L4D CI flinching and play sound 
-	local meleeRange = self:GetStatL("Secondary.BashLength") * 1.5
-	PrintTable(  totalResults  )
-	for _,v in pairs(ents.FindInSphere(self:GetOwner():GetShootPos(), meleeRange)) do
-		if v:IsNPC() && self:GetOwner():Visible(v) && v != self && v != owner then
-			if (v.VJ_L4D2_SpecialInfected or v.Shove_Forward or v.Zombie_CanPuke != nil) && !v.VJ_NoFlinch && v:Health() > 0 then	
-				local inCone = (self:GetOwner():GetAimVector():Angle():Forward():Dot(((v:GetPos() +v:OBBCenter()) - self:GetOwner():GetShootPos()):GetNormalized()) > math.cos(math.rad((meleeRange))))
-				if inCone then
-					if not (sp and CLIENT) && not hitNPCs[v] then -- remove double hit sounds 
-						self:EmitSound(
-							self:GetStatL("Secondary.BashHitSound_Flesh") or
-							self:GetStatL("Secondary.BashHitSound"))
-					end	
-					---v:TakeDamageInfo(dmgInfo,self:GetOwner())
-					Flinch(self, v)
-				end
-			else
-			end 
+
+	-- glancing blow -- hit in cone but not hit by trace 
+	local damage_glance  = DamageInfo()
+	damage_glance:SetAttacker(self:GetOwner())
+	damage_glance:SetInflictor(self)
+	damage_glance:SetDamage(attk.dmg)
+	damage_glance:SetDamageType(attk.dmgtype or DMG_SLASH)
+	damage_glance:SetDamageForce(forcevec)
+
+	if SERVER then
+
+		local meleeRange = self:GetStatL("Secondary.BashLength") * 1
+		for _,v in pairs(ents.FindInSphere(self:GetOwner():GetShootPos(), meleeRange)) do
+			if v:IsNPC() && self:GetOwner():Visible(v) && v != self && v != owner then
+				if (v.VJ_L4D2_SpecialInfected or v.Shove_Forward or v.Zombie_CanPuke != nil) && !v.VJ_NoFlinch && v:Health() > 0 then	
+					local inCone = (self:GetOwner():GetAimVector():Angle():Forward():Dot(((v:GetPos() +v:OBBCenter()) - self:GetOwner():GetShootPos()):GetNormalized()) > math.cos(math.rad((meleeRange))))
+					if inCone then
+						-- print(v:EntIndex())
+						-- PrintTable(hitNPCs)
+
+						if not (sp and CLIENT) && not hitNPCs[v:EntIndex()] then -- remove double hit sounds 
+							
+							v:TakeDamageInfo(damage_glance, self:GetOwner())
+						end	
+						self:EmitSoundNet(attk.hitflesh)
+						Flinch(self, v)
+					end
+				else
+				end 
+			end
 		end
+
+		
 	end
 
 end
